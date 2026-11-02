@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Move Compass — Is That Raise Real?</title>
+<meta name="description" content="Compare staying vs moving on real monthly leftover: taxes, housing and living costs, the break-even salary, moving-cost payback and the 10-year wealth gap.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" sizes="32x32" href="icons/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<meta name="theme-color" content="#0A0E18">
+<style>
+:root{--bg:#0A0E18;--surface:#111828;--surface2:#0D1322;--text:#EDEFF2;--muted:#9AA3B5;--accent:#C8A951;--accent2:#4A5A7A;--good:#7FB069;--bad:#C25B4E;--line:#26314A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 79px,rgba(200,169,81,.05) 79px 80px),repeating-linear-gradient(90deg,transparent 0 79px,rgba(200,169,81,.05) 79px 80px)}
+.wrap{max-width:1060px;margin:0 auto;padding:28px 18px 60px;position:relative}
+.eyebrow{letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-size:.72rem;text-align:center}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);margin:.15em 0 .1em;text-align:center;font-weight:600}
+.sub{text-align:center;color:var(--muted);font-style:italic;max-width:640px;margin:0 auto 8px}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:22px 0;border:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);padding:20px;position:relative}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.6}
+.card h2{margin:0 0 4px;font-size:1.25rem;color:var(--accent)}
+.card h2 .rose{color:var(--accent2);margin-right:.35em}
+label{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--line);color:var(--text);padding:9px 10px;font-family:inherit;font-size:1rem}
+input:focus{outline:1px solid var(--accent)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hero{background:var(--surface);border:1px solid var(--accent);padding:26px;text-align:center;margin-top:18px}
+.seal{display:inline-block;border:2px solid var(--accent);color:var(--accent);border-radius:50%;width:148px;height:148px;line-height:1.15;padding-top:42px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;font-size:.95rem;transform:rotate(-4deg);background:rgba(200,169,81,.06)}
+.hero-num{font-size:clamp(2rem,6vw,3.2rem);color:var(--accent);margin:14px 0 2px}
+.hero p{color:var(--muted);max-width:620px;margin:6px auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.stat{background:var(--surface);border:1px solid var(--line);padding:14px;text-align:center}
+.stat b{display:block;font-size:1.35rem;color:var(--accent);font-weight:600}
+.stat span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.95rem}
+th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--accent);font-weight:600;letter-spacing:.04em}
+tr.hl td{color:var(--accent);font-weight:bold}
+button{background:var(--accent);color:#0A0E18;border:0;padding:11px 18px;font-family:inherit;font-weight:bold;letter-spacing:.05em;cursor:pointer;font-size:.95rem}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent2)}
+button.small{padding:6px 10px;font-size:.82rem}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.note{color:var(--muted);font-size:.88rem;font-style:italic}
+.bar{display:flex;height:18px;border:1px solid var(--line);overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%}
+.legend{font-size:.8rem;color:var(--muted)}
+.saved-item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:8px 0}
+footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:36px}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">✦ The Bull Brew · Daily Tools ✦</div>
+  <h1>The Move Compass</h1>
+  <p class="sub">A $14,000 raise can be a pay cut with a moving truck. Plot both cities on the only map that matters — what is actually left at the end of the month.</p>
+  <hr class="rule">
+
+  <div class="btns" style="justify-content:center">
+    <button class="ghost small" data-preset="sunbelt">High-tax metro → Sun Belt</button>
+    <button class="ghost small" data-preset="midwest">Coast → Midwest</button>
+    <button class="ghost small" data-preset="remote">Remote: keep the salary, move cheap</button>
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <section class="card">
+      <h2><span class="rose">✦</span>Here — Staying</h2>
+      <label>Place label</label><input id="hereName" value="Current city">
+      <div class="row">
+        <div><label>Gross salary ($/yr)</label><input type="number" id="hereSalary" value="98000"></div>
+        <div><label>All-in tax rate (%)</label><input type="number" id="hereTax" value="34" step="0.5"></div>
+      </div>
+      <div class="row">
+        <div><label>Housing ($/mo)</label><input type="number" id="hereHousing" value="1950"></div>
+        <div><label>Living costs ($/mo)</label><input type="number" id="hereLiving" value="2200"></div>
+      </div>
+      <div class="row">
+        <div><label>Transport ($/mo)</label><input type="number" id="hereTransport" value="450"></div>
+        <div><label>Other fixed ($/mo)</label><input type="number" id="hereOther" value="650"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="rose">✦</span>There — The Move</h2>
+      <label>Place label</label><input id="thereName" value="Offer city">
+      <div class="row">
+        <div><label>Gross salary offer ($/yr)</label><input type="number" id="thereSalary" value="112000"></div>
+        <div><label>All-in tax rate (%)</label><input type="number" id="thereTax" value="28" step="0.5"></div>
+      </div>
+      <div class="row">
+        <div><label>Housing ($/mo)</label><input type="number" id="thereHousing" value="2400"></div>
+        <div><label>Living costs ($/mo)</label><input type="number" id="thereLiving" value="2350"></div>
+      </div>
+      <div class="row">
+        <div><label>Transport ($/mo)</label><input type="number" id="thereTransport" value="500"></div>
+        <div><label>Other fixed ($/mo)</label><input type="number" id="thereOther" value="700"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <section class="card">
+      <h2><span class="rose">✦</span>The Crossing</h2>
+      <div class="row">
+        <div><label>One-time moving cost ($)</label><input type="number" id="moveCost" value="7500"></div>
+        <div><label>Invest the difference at (%/yr)</label><input type="number" id="investReturn" value="7" step="0.5"></div>
+      </div>
+      <p class="note">Moving cost: truck, deposits, double rent, flights, the new couch that somehow becomes mandatory. Price it honestly — it sets your payback clock.</p>
+    </section>
+    <section class="card">
+      <h2><span class="rose">✦</span>How to read the tax line</h2>
+      <p class="note" style="font-style:normal;color:var(--text)">Use your <b>effective</b> all-in rate — federal + state + city tax actually paid, divided by gross pay — not your top bracket. Check last year's return: total tax ÷ gross income. A no-income-tax state can move this line 5–10 points, which is often the whole decision.</p>
+    </section>
+  </div>
+
+  <section class="hero">
+    <div class="seal" id="seal">Move<br>Pays</div>
+    <div class="hero-num" id="heroNum">$0 / mo</div>
+    <p id="heroText"></p>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><b id="stBreakeven">—</b><span>Break-even salary there</span></div>
+    <div class="stat"><b id="stRaise">—</b><span>Nominal raise</span></div>
+    <div class="stat"><b id="stPayback">—</b><span>Moving-cost payback</span></div>
+    <div class="stat"><b id="stTenYear">—</b><span>10-yr wealth gap*</span></div>
+  </div>
+  <p class="note" style="text-align:center">*If the monthly difference is invested every month at your rate above. Negative means staying wins.</p>
+
+  <section class="card" style="margin-top:18px">
+    <h2><span class="rose">✦</span>Side by Side</h2>
+    <table>
+      <thead><tr><th></th><th id="thHere">Here</th><th id="thThere">There</th><th>Difference</th></tr></thead>
+      <tbody id="compareBody"></tbody>
+    </table>
+    <h3 style="color:var(--accent);margin:20px 0 4px">Where the take-home goes — There</h3>
+    <div class="bar" id="barThere"></div>
+    <div class="legend" id="legendThere"></div>
+    <h3 style="color:var(--accent);margin:16px 0 4px">Where the take-home goes — Here</h3>
+    <div class="bar" id="barHere"></div>
+    <div class="legend" id="legendHere"></div>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2><span class="rose">✦</span>Negotiate From This Table</h2>
+    <p class="note" style="font-style:normal;color:var(--text)">If the offer sits below break-even, this is your counter — in the employer's own arithmetic.</p>
+    <table>
+      <thead><tr><th>Offer salary</th><th>Leftover there</th><th>vs staying</th><th>Reading</th></tr></thead>
+      <tbody id="sensBody"></tbody>
+    </table>
+  </section>
+
+  <section class="card" style="margin-top:18px">
+    <h2><span class="rose">✦</span>Saved Crossings</h2>
+    <div class="row">
+      <div><label>Scenario name</label><input id="saveName" placeholder="e.g. Austin offer, March"></div>
+      <div style="display:flex;align-items:flex-end"><button id="saveBtn" style="width:100%">Save this comparison</button></div>
+    </div>
+    <div id="savedList"></div>
+    <div class="btns">
+      <button class="ghost" id="copyBtn">Copy summary</button>
+    </div>
+    <p class="note" id="copyNote"></p>
+  </section>
+
+  <hr class="rule">
+  <p><b>The method.</b> Salary is a headline; leftover is a life. First, taxes are not a footnote — in a cross-state move they can be worth more than the raise itself, so both cities are taxed at their real effective rate. Second, housing gets no romance: the cheaper city only wins if you actually bank the difference instead of upgrading it away. Third, a move has to pay for its own truck — if the monthly gain cannot retire the moving cost inside about two years, you are not relocating, you are donating. Plot the course before you pack a single box.</p>
+
+  <footer>Estimates only — not financial or tax advice. Effective tax rates are your inputs, not a tax table.<br>Built by The Bull Brew · One useful tool, every day.</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const ids=['hereName','hereSalary','hereTax','hereHousing','hereLiving','hereTransport','hereOther','thereName','thereSalary','thereTax','thereHousing','thereLiving','thereTransport','thereOther','moveCost','investReturn'];
+const num=id=>parseFloat($(id).value)||0;
+const money=v=>{const s=v<0?'-':'';return s+'$'+Math.abs(Math.round(v)).toLocaleString('en-US')};
+function side(p){
+  const gross=num(p+'Salary'), tax=num(p+'Tax')/100;
+  const takeHome=gross*(1-tax)/12;
+  const housing=num(p+'Housing'), living=num(p+'Living'), transport=num(p+'Transport'), other=num(p+'Other');
+  const costs=housing+living+transport+other;
+  return {gross,tax,takeHome,housing,living,transport,other,costs,leftover:takeHome-costs,label:$(p+'Name').value||p};
+}
+function calc(){
+  const H=side('here'), T=side('there');
+  const diff=T.leftover-H.leftover;
+  const moveCost=num('moveCost'), r=num('investReturn')/100;
+  // Break-even salary There: S*(1-t)/12 - costsT = leftoverH  =>  S = (leftoverH+costsT)*12/(1-t)
+  const breakeven=(H.leftover+T.costs)*12/Math.max(0.01,(1-T.tax));
+  const nominal=(T.gross-H.gross)/(H.gross||1)*100;
+  const payback=diff>0?moveCost/diff:Infinity;
+  const months=120, mr=r/12;
+  const fv10=mr>0?diff*((Math.pow(1+mr,months)-1)/mr):diff*months;
+
+  let seal, why;
+  if(T.gross>H.gross && diff<=-100){seal='Pay Cut<br>in Disguise';why='The headline salary goes up and the month-end money goes down. That is not a raise — it is a relocation with better marketing.'}
+  else if(diff>=400){seal='Move<br>Pays';why='The move clears its costs with room to spare. Bank the difference instead of upgrading it away and this compounds.'}
+  else if(diff<=-400){seal='Stay<br>Put';why='Staying leaves more on the table every single month. A move this far underwater needs a non-money reason to make sense.'}
+  else{seal='Close<br>Call';why='The money is close to a wash. Decide on the life, not the spreadsheet — but do not pretend there is a raise in it if there is not.'}
+  $('seal').innerHTML=seal;
+  $('heroNum').textContent=(diff>=0?'+':'')+money(diff)+' / mo';
+  $('heroNum').className='hero-num '+(diff>=0?'pos':'neg');
+  $('heroText').textContent=why+' Staying leaves '+money(H.leftover)+'/mo; moving leaves '+money(T.leftover)+'/mo.';
+  $('stBreakeven').textContent=money(breakeven);
+  $('stRaise').textContent=(nominal>=0?'+':'')+nominal.toFixed(1)+'%';
+  $('stPayback').textContent=isFinite(payback)?(payback<1?'Under 1 mo':payback.toFixed(1)+' months'):'Never';
+  $('stTenYear').textContent=(fv10>=0?'+':'')+money(fv10);
+
+  $('thHere').textContent=H.label; $('thThere').textContent=T.label;
+  const rows=[
+    ['Gross salary /yr',money(H.gross),money(T.gross),money(T.gross-H.gross)],
+    ['Take-home /mo',money(H.takeHome),money(T.takeHome),money(T.takeHome-H.takeHome)],
+    ['Housing /mo',money(H.housing),money(T.housing),money(T.housing-H.housing)],
+    ['Living + transport + other /mo',money(H.living+H.transport+H.other),money(T.living+T.transport+T.other),money((T.living+T.transport+T.other)-(H.living+H.transport+H.other))],
+    ['Total costs /mo',money(H.costs),money(T.costs),money(T.costs-H.costs)],
+    ['LEFTOVER /mo',money(H.leftover),money(T.leftover),money(diff)],
+    ['Leftover /yr',money(H.leftover*12),money(T.leftover*12),money(diff*12)]
+  ];
+  $('compareBody').innerHTML=rows.map((row,i)=>'<tr'+(i===5?' class="hl"':'')+'><td>'+row[0]+'</td><td>'+row[1]+'</td><td>'+row[2]+'</td><td>'+row[3]+'</td></tr>').join('');
+
+  function bar(el,leg,S){
+    const parts=[[S.housing,'#C8A951','Housing'],[S.living,'#4A5A7A','Living'],[S.transport,'#7A6A3A','Transport'],[S.other,'#2E3A55','Other']];
+    if(S.leftover>0)parts.push([S.leftover,'#7FB069','Leftover']);
+    const total=Math.max(S.takeHome,1);
+    el.innerHTML=parts.map(p=>'<i style="width:'+Math.max(0,p[0]/total*100)+'%;background:'+p[1]+'"></i>').join('');
+    leg.textContent=parts.map(p=>p[2]+' '+money(p[0])).join(' · ')+(S.leftover<0?' · Shortfall '+money(S.leftover):'');
+  }
+  bar($('barHere'),$('legendHere'),H); bar($('barThere'),$('legendThere'),T);
+
+  const offs=[-20000,-10000,-5000,0,5000,10000,20000];
+  $('sensBody').innerHTML=offs.map(o=>{
+    const s=T.gross+o, left=s*(1-T.tax)/12-T.costs, d=left-H.leftover;
+    const read=s<breakeven?'Below break-even':(d>=400?'Move pays':(d<=-400?'Stay put':'Close call'));
+    return '<tr'+(o===0?' class="hl"':'')+'><td>'+money(s)+(o===0?' (offer)':'')+'</td><td>'+money(left)+'</td><td>'+(d>=0?'+':'')+money(d)+'/mo</td><td>'+read+'</td></tr>';
+  }).join('');
+  return {H,T,diff,breakeven,nominal,payback,fv10,seal:seal.replace('<br>',' ')};
+}
+let last=null;
+function run(){last=calc()}
+ids.forEach(id=>{$(id).addEventListener('input',run);$(id).addEventListener('change',run)});
+
+const presets={
+  sunbelt:{hereName:'High-tax metro',hereSalary:120000,hereTax:38,hereHousing:2800,hereLiving:2600,hereTransport:600,hereOther:800,thereName:'Sun Belt (no state income tax)',thereSalary:105000,thereTax:29,thereHousing:1750,thereLiving:2100,thereTransport:450,thereOther:600,moveCost:8500,investReturn:7},
+  midwest:{hereName:'Coastal city',hereSalary:95000,hereTax:35,hereHousing:2400,hereLiving:2300,hereTransport:500,hereOther:700,thereName:'Midwest city',thereSalary:82000,thereTax:30,thereHousing:1350,thereLiving:1800,thereTransport:400,thereOther:550,moveCost:6000,investReturn:7},
+  remote:{hereName:'Expensive base',hereSalary:110000,hereTax:36,hereHousing:2600,hereLiving:2400,hereTransport:550,hereOther:750,thereName:'Cheaper base (remote, same pay)',thereSalary:110000,thereTax:30,thereHousing:1500,thereLiving:1900,thereTransport:400,thereOther:600,moveCost:5000,investReturn:7}
+};
+document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{
+  const p=presets[b.dataset.preset]; ids.forEach(id=>{if(p[id]!==undefined)$(id).value=p[id]}); run();
+}));
+
+const KEY='moveCompassScenarios';
+function saved(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+function renderSaved(){
+  const list=saved();
+  $('savedList').innerHTML=list.length?list.map((s,i)=>'<div class="saved-item"><span><b>'+s.name+'</b> — '+(s.summary||'')+'</span><span><button class="ghost small" data-load="'+i+'">Load</button> <button class="ghost small" data-del="'+i+'">Delete</button></span></div>').join(''):'<p class="note">No saved crossings yet.</p>';
+  document.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>{const s=saved()[+b.dataset.load]; if(!s)return; ids.forEach(id=>{if(s.data[id]!==undefined)$(id).value=s.data[id]}); run();}));
+  document.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{const l=saved(); l.splice(+b.dataset.del,1); localStorage.setItem(KEY,JSON.stringify(l)); renderSaved();}));
+}
+$('saveBtn').addEventListener('click',()=>{
+  const name=$('saveName').value.trim()||'Untitled crossing';
+  const data={}; ids.forEach(id=>data[id]=$(id).value);
+  const l=saved(); l.push({name,data,summary:last?((last.diff>=0?'+':'')+money(last.diff)+'/mo, break-even '+money(last.breakeven)):''});
+  localStorage.setItem(KEY,JSON.stringify(l)); $('saveName').value=''; renderSaved();
+});
+$('copyBtn').addEventListener('click',()=>{
+  if(!last)return;
+  const txt='THE MOVE COMPASS — '+last.H.label+' vs '+last.T.label+'\nVerdict: '+last.seal+'\nLeftover here: '+money(last.H.leftover)+'/mo · Leftover there: '+money(last.T.leftover)+'/mo · Difference: '+(last.diff>=0?'+':'')+money(last.diff)+'/mo\nNominal raise: '+(last.nominal>=0?'+':'')+last.nominal.toFixed(1)+'% · Break-even salary there: '+money(last.breakeven)+'\nMoving-cost payback: '+(isFinite(last.payback)?last.payback.toFixed(1)+' months':'never')+' · 10-yr wealth gap if invested: '+(last.fv10>=0?'+':'')+money(last.fv10);
+  if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>{$('copyNote').textContent='Summary copied.'});
+  else{$('copyNote').textContent=txt}
+});
+run(); renderSaved();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+</script>
+</body>
+</html>
